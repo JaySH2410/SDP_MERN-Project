@@ -1,0 +1,17 @@
+.navbar{
+    padding: 20px 0;
+}
+.text{
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #c4c5c5;
+    text-decoration: none;
+    
+}
+
+.cabin{
+    height: 35px;
+    width: 35px;
+    margin-right: 6px;
+}
