@@ -7,7 +7,7 @@ import Navigation from './Components/Shared/Navigation/Navigation';
 import Authenticate from './Pages/Authenticate/Authenticate';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { useReducer } from 'react';
-const isAuth = false;
+const isAuth = true;
 const user = {
   activated:false,
 };
@@ -26,7 +26,7 @@ function App() {
         <Route path="/login" exact>
           <Login/>
         </Route>*/}
-        <GuestRoute path="/authenticate" exact> 
+        <GuestRoute path="/authenticate"> 
           <Authenticate/>
         </GuestRoute>
       </Switch>
@@ -34,7 +34,7 @@ function App() {
   );
 }
 
-const GuestRoute = (children, ...rest) => {
+const GuestRoute = ({children, ...rest}) => {
   return(
     <Route
       {...rest}
@@ -55,7 +55,7 @@ const GuestRoute = (children, ...rest) => {
   )
 }
 
-const SemiProtectedRoute = (children, ...rest) => {
+const SemiProtectedRoute = ({children, ...rest}) => {
   return(
     <Route
       {...rest}
