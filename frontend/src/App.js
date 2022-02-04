@@ -1,15 +1,14 @@
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect  } from 'react-router-dom';
 import Home from './Pages/Home/Home';
-import Register from './Pages/Register/Register';
-import Login from './Pages/Login/Login';
 import Navigation from './Components/Shared/Navigation/Navigation';
 import Authenticate from './Pages/Authenticate/Authenticate';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import Activate from './Pages/Activate/Activate';
+import Rooms from './Pages/Rooms/Rooms';
 import { useReducer } from 'react';
-const isAuth = true;
+const isAuth = false;
 const user = {
-  activated:false,
+  activated:  false,
 };
 
 function App() {
@@ -20,15 +19,18 @@ function App() {
         <GuestRoute path="/" exact>
           <Home/>
         </GuestRoute>
-        {/* <Route path="/register" exact>
-          <Register/>
-        </Route>
-        <Route path="/login" exact>
-          <Login/>
-        </Route>*/}
         <GuestRoute path="/authenticate"> 
           <Authenticate/>
         </GuestRoute>
+        <SemiProtectedRoute path="/activate">
+          <Activate/>
+        </SemiProtectedRoute>
+        <ProtectedRoute path="/rooms">
+          <Rooms/>
+        </ProtectedRoute>
+        {/* <ProtectedRoute path="/rooms">
+          <Rooms/>
+        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );
@@ -76,6 +78,34 @@ const SemiProtectedRoute = ({children, ...rest}) => {
             state: {from: location},
           }}
         />
+      }
+      }
+    />
+  )
+}
+
+const ProtectedRoute = ({children, ...rest}) => {
+  return(
+    <Route
+      {...rest}
+      render = {({location})=>{
+        return !isAuth?(
+          <Redirect
+            to={{
+              path: '/',
+              state: {from:location},
+            }}
+          />
+        ) : isAuth && !user.activated?(
+          <Redirect
+          to={{
+            pathname: '/activate',
+            state: {from: location},
+          }}
+        />
+        ):(         
+            children
+        )
       }
       }
     />

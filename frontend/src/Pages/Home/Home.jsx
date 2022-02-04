@@ -17,7 +17,7 @@ const Home = () => {
     const history = useHistory();
 
     function StartRegister() {
-        history.push("/register");
+        history.push("/Authenticate");
     }
 
     return(
@@ -30,11 +30,11 @@ const Home = () => {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo vitae libero quis dapibus.
                 </p>
                 <div>
-                    <Button onClick={StartRegister} text="Sign-Up"/>
+                    <Button onClick={StartRegister} text="Go"/>
                 </div>
-                <div className={styles.signinWrapper}>
-                    <Link style={signinLinkStyle} to="/login">Sign-In</Link>
-                </div>
+                {/* <div className={styles.signinWrapper}>
+                    <Link style={signinLinkStyle} to="/login">Start</Link>
+                </div> */}
             </Card>
         </div>
     )
