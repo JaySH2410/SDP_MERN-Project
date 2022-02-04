@@ -4,3 +4,14 @@ Content-Type: application/json
 {
     "phone": "+917016033706"
 }
+
+###
+
+POST http://localhost:5000/api/verify-otp HTTP/1.1;
+Content-Type: application/json
+
+{
+    "phone": "+917016033706",
+    "otp":  7754,
+    "hash":"4581c7d8891cabcaec1ecd328806b022ab50d4fbee09ea885e50b1c3c5dba8b3.1644003345376",
+}
