@@ -3,11 +3,27 @@ import TextBox from "../../../Components/Shared/TextBox/TextBox";
 import Button from "../../../Components/Shared/Button/Button";
 import Card from "../../../Components/Shared/Card/Card";
 import styles from "./StepOtp.module.css";
+import { verifyOtp } from "../../../http";
+import { useSelector } from "react-redux";
+import { setAuth } from "../../../store/authSlice";
+import { useDispatch } from "react-redux";
 
 
 const StepOtp = ({ onNext }) => {
     const [otp,setOtp] = useState('');
-    function next(){};
+    const dispatch = useDispatch();
+    const { phone, hash } = useSelector((state) => state.auth.otp);
+    async function submit(){
+        try{
+            const { data } = await verifyOtp({ otp, phone, hash});
+            console.log(data);
+            dispatch(setAuth(data));
+            // onNext(); // not needed cause state is reactive
+        } catch(err){
+            console.log(err);
+        }
+        
+    };
     return (
         <>
             <div className={styles.cardWrapper}>
@@ -18,7 +34,7 @@ const StepOtp = ({ onNext }) => {
                     />
                    
                    <div className={styles.actionButtonWrap}>
-                        <Button onClick={next} text="Next"/>
+                        <Button onClick={submit} text="Next"/>
                    </div>
                 </Card>
             </div>

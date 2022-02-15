@@ -2,10 +2,14 @@ import React from "react";
 import styles from "./TextBox.module.css";
 
 
-const TextBox = () => {
+const TextBox = (props) => {
     return(
         <div>
-            <input className={styles.input} type="text"/>
+            <input 
+            className={styles.input} 
+            type="text"
+            {...props}
+        />
         </div>
     );
     

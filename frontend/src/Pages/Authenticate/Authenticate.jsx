@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import StepOtp from "../Steps/StepOtp/StepOtp";
 import StepPhone from "../Steps/StepPhone/StepPhone";
 
@@ -12,7 +12,7 @@ const Authenticate = () => {
     const Step = steps[step];
 
     function onNext(){
-        setStep(step+1);
+        setStep(step + 1);
     }
     return (
         <div>

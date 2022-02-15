@@ -4,6 +4,14 @@ const express = require('express');
 const app = express();
 const DbConnect = require('./database');
 const router = require('./routes');
+const cors = require('cors');
+
+const corsOption={
+    origin: ['http://localhost:3000']
+};
+
+app.use(cors(corsOption));
+
 const PORT=process.env.port||5000;
 
 DbConnect();
