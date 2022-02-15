@@ -16,7 +16,7 @@ const Activate = () => {
 
     }
 
-    return <div>
+    return <div className="cardWrapper">  
         <Step onNext = {onNext}>
 
         </Step>
