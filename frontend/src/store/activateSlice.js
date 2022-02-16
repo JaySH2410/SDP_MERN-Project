@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   name: '',
-  pic: '',
+  avatar: '',
 };
 
 export const activateSlice = createSlice({
@@ -14,13 +14,13 @@ export const activateSlice = createSlice({
       //TODO
       state.name = action.payload;
     },
-    setPic: (state, action) => {
-      state.pic = action.payload;
+    setAvatar: (state, action) => {
+      state.avatar = action.payload;
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setName, setPic } = activateSlice.actions
+export const { setName, setAvatar } = activateSlice.actions
 
 export default activateSlice.reducer
