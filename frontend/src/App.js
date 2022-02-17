@@ -5,15 +5,18 @@ import Navigation from './Components/Shared/Navigation/Navigation';
 import Authenticate from './Pages/Authenticate/Authenticate';
 import Activate from './Pages/Activate/Activate';
 import Rooms from './Pages/Rooms/Rooms';
-import { useReducer } from 'react';
 import { useSelector } from 'react-redux';
+import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 // const isAuth = false;
 // const user = {
 //   activated:  false,
 // };
 
 function App() {
-  return (
+  const { loading } = useLoadingWithRefresh();
+  return loading ? (
+    'loading'
+  ) : (
     <BrowserRouter>
       <Navigation/>
       <Switch>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../../../Components/Shared/Card/Card";
 import Button from "../../../Components/Shared/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,8 @@ const StepPic = ({ onNext }) => {
     
     const { name, avatar } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/default.png');
+    // const [loading, setLoading] = useState(false);
+    // const [unMounted, setUnMounted] = useState(false);
     const dispatch = useDispatch();
     
 
@@ -28,18 +30,32 @@ const StepPic = ({ onNext }) => {
     }
 
     async function submit(){
+        // if(!name || !avatar) return ;
+        // setLoading(true);
         try{
-            console.log('check');
+            //console.log('check');
             const {data} = await activate({ name, avatar });
             if(data.auth){
+                // if(!unMounted)
                 dispatch(setAuth(data));
             }
             //console.log(data);
         }catch(err){
-            console.log('check');
+            //console.log('check');
             console.log(err);
         }
+        //  finally{
+        //     setLoading(false);
+        // }
     }
+
+    // useEffect(() =>{
+    //     return () =>{
+    //         setUnMounted(true);
+    //     }
+    // }, []);
+
+
     
     return (
         <>
