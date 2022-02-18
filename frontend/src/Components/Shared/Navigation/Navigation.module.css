@@ -20,17 +20,32 @@
 }
 
 .logout{
-    background-color: #0077FF;
-    color: #fff;
+    background-color: transparent;
+    font-size: 18px;
+    color: #07f;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 4px;
     transition: all 0.3s;
+    position: relative;
 }
 
 .logout:hover{
-    background-color: #014a9c;
+    object-fit:cover;
+    background-color: #07f;
+    color: #fff;
 }
+
+/* .logout:hover::after{
+    content: '';
+    position: absolute;
+    width: 95%;
+    height: 2px;
+    bottom: -5px;
+    left: 3px;
+    background: #07f;   
+    transition: all 0.3s; 
+} */
 
 .navRight{
     display: flex;
