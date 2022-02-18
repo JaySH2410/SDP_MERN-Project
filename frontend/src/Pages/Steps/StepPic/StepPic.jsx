@@ -6,14 +6,15 @@ import styles from "./StepPic.module.css";
 import {setAvatar} from "../../../store/activateSlice";
 import {setAuth} from "../../../store/authSlice";
 import { activate } from "../../../http";
+import Loader from "../../../Components/Shared/Loader/Loader";
 
 
 const StepPic = ({ onNext }) => {
     
     const { name, avatar } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/default.png');
-    // const [loading, setLoading] = useState(false);
-    // const [unMounted, setUnMounted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [unMounted, setUnMounted] = useState(false);
     const dispatch = useDispatch();
     
 
@@ -30,33 +31,34 @@ const StepPic = ({ onNext }) => {
     }
 
     async function submit(){
-        // if(!name || !avatar) return ;
-        // setLoading(true);
+        if(!name || !avatar) return ;
+        setLoading(true);
         try{
             //console.log('check');
             const {data} = await activate({ name, avatar });
             if(data.auth){
-                // if(!unMounted)
-                dispatch(setAuth(data));
+                if(!unMounted){
+                    dispatch(setAuth(data));
+                }
             }
             //console.log(data);
         }catch(err){
             //console.log('check');
             console.log(err);
         }
-        //  finally{
-        //     setLoading(false);
-        // }
+         finally{
+            setLoading(false);
+        }
     }
 
-    // useEffect(() =>{
-    //     return () =>{
-    //         setUnMounted(true);
-    //     }
-    // }, []);
+    useEffect(() =>{
+        return () =>{
+            setUnMounted(true);
+        }
+    }, []);
 
 
-    
+    if(loading) return <Loader message="Activation in progress.This may take a moment."/>
     return (
         <>
            

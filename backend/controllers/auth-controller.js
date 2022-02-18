@@ -108,13 +108,13 @@ class AuthController {
             const token = await tokenService.findRefreshToken(userData._id, refreshTokenFromCookie);
 
             if(!token){
-                res.status(401).json({message: 'invalid token'});
+                return res.status(401).json({message: 'invalid token'});
             }
         } catch(err){
             res.status(500).json({message: 'internal error'});
         }
         //check if valid user
-        const user = userService.findUser({_id: userData._id});
+        const user = await userService.findUser({_id: userData._id});
         if(!user){
             res.status(404).json({message: 'user no found'});
         }

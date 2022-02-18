@@ -17,7 +17,7 @@ const Navigation = () => {
     };
 
     const dispatch = useDispatch();
-    const { isAuth } = useSelector((state) => state.auth)
+    const { isAuth, user } = useSelector((state) => state.auth)
     async function logoutUser(){
         try{
             const { data } = await logout();
@@ -33,12 +33,35 @@ const Navigation = () => {
             <img className={styles.cabin} src="/images/cabin.png"></img>
                 <span>PodHut</span>
             </Link>
-            {isAuth && <button onClick={logoutUser}>Logout</button>}
+            {/* {isAuth && <button onClick={logoutUser}>Logout</button>} */}
             {/* <div className={styles.navRight}>
                 <h3>
                     {user.name}
                 </h3>
+                <Link to="/">
+                    <img className={styles.avatar} src={user.avatar} width="40" height="40" alt="display picture"></img>
+                </Link>
+                <button className={styles.logout} onClick={logoutUser}>Logout</button>
             </div> */}
+            <div className={styles.navRight}>
+                    <h3>{user?.name}</h3>
+                    <Link to="/">
+                        <img
+                            className={styles.avatar}
+                            src={
+                                user.avatar ? user.avatar
+                                    : '/images/default.png'
+                            }
+                            width="40"
+                            height="40"
+                            alt="DP"
+                        />
+                    </Link>
+                    <button
+                        className={styles.logout}
+                        onClick={logoutUser}
+                    >Logout</button>
+                </div>
             {/* {isAuth && <button onClick={logoutUser}>Logout</button>} */}
 
         </nav>

@@ -23,6 +23,11 @@
     height: auto;
   }
 
+  button{
+    border: none;
+    outline: none;
+  }
+
   body{
     background: #121212;
     color: #fff;
