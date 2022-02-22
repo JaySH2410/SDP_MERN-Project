@@ -7,6 +7,9 @@ const TextBox = (props) => {
         <div>
             <input 
             className={styles.input} 
+            style={{
+                width: props.fullwidth === 'true' ? '100%':'inherit',
+            }}
             type="text"
             {...props}
         />

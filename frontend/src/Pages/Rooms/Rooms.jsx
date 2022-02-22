@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Rooms.module.css";
 import RoomCard from '../../Components/RoomCard/RoomCard';
+import AddRoomModal from '../../Components/AddRoomModal/AddRoomModal';
 
 const rooms = [
     {
@@ -57,6 +58,13 @@ const rooms = [
 ]
 
 const Rooms = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    function openModal() {
+        setShowModal(true);
+    }
+
     return <>
         <div className="container">
             <div className={styles.roomsHeader}>
@@ -68,23 +76,19 @@ const Rooms = () => {
                     </div>
                 </div>
                 <div className={styles.right}>
-                    <button className={styles.startRoomButton}>
+                    <button onClick={openModal} className={styles.startRoomButton}>
                         <img src="/images/add-room-icon.png" alt="add-room"></img>
                         <span> Start New Room</span>
                     </button>
                 </div>
             </div>
             <div className={styles.roomList}>
-                {rooms.map((room) => (
-               <>
-               <RoomCard key={room.id} room={room}/>
-                {/* <RoomCard key={room.id} room={room}/>
-                <RoomCard key={room.id} room={room}/>
-                <RoomCard key={room.id} room={room}/> */}
-               </>
+                {rooms.map((room) => (            
+                    <RoomCard key={room.id} room={room}/>              
                 ))}
             </div>
         </div>
+        {showModal && <AddRoomModal onClose={() => setShowModal(false)}/>}
     </>
 };
 
