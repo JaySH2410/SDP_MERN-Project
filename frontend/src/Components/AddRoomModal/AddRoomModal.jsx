@@ -2,16 +2,24 @@ import React, { useState } from "react";
 import styles from './AddRoomModal.module.css';
 import TextBox from '../Shared/TextBox/TextBox';
 import { createRoom as create } from '../../http';
+import { useHistory } from 'react-router-dom';
+
 
 const AddRoomModel = ({onClose}) => {
+    const history = useHistory();
+
     const [roomType, setRoomType] = useState('open');
     const [topic, setTopic] = useState('');
-    function createRoom() {
+
+    async function createRoom() {
         //server call
         try{
             if(!topic) return;
-            const data = await create(topic, roomType);
-            console.log(data);
+            
+            const {data} = await create({topic, roomType});
+            history.push(`/room/${data.id}`);
+            // console.log(data);
+
         }catch(err){
             console.log(err);
         }

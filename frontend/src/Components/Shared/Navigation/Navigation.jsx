@@ -56,7 +56,8 @@ const Navigation = () => {
                             height="40"
                             alt="DP"
                         />
-                    </Link>
+                    </Link> 
+            
                     <button
                         className={styles.logout}
                         onClick={logoutUser}

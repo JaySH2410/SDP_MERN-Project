@@ -5,6 +5,7 @@ import Navigation from './Components/Shared/Navigation/Navigation';
 import Authenticate from './Pages/Authenticate/Authenticate';
 import Activate from './Pages/Activate/Activate';
 import Rooms from './Pages/Rooms/Rooms';
+import Room from './Pages/Room/Room';
 import { useSelector } from 'react-redux';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import Loader from './Components/Shared/Loader/Loader';
@@ -34,9 +35,9 @@ function App() {
         <ProtectedRoute path="/rooms">
           <Rooms/>
         </ProtectedRoute>
-        {/* <ProtectedRoute path="/rooms">
-          <Rooms/>
-        </ProtectedRoute> */}
+        <ProtectedRoute path="/room/:id">
+          <Room/>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
