@@ -90,6 +90,7 @@ const Rooms = () => {
                         <img src="/images/add-room-icon.png" alt="add-room"></img>
                         <span> Start New Room</span>
                     </button>
+
                 </div>
             </div>
             <div className={styles.roomList}>

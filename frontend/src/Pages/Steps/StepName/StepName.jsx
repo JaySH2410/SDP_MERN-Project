@@ -25,7 +25,7 @@ const StepName = ({ onNext }) => {
                     value={fullname}
                     onChange={(e) => setFullName(e.target.value)}
                     />                   
-                   <div>
+                   <div className={styles.actionButtonWrap}>
                         <Button onClick={nextStep} text="Next"/>
                    </div>
                 </Card>
