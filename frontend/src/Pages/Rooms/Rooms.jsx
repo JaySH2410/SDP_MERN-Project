@@ -79,7 +79,7 @@ const Rooms = () => {
         <div className="container">
             <div className={styles.roomsHeader}>
                 <div className={styles.left}>
-                    <span className={styles.heading}>All voice rooms</span>
+                    <span className={styles.heading}>All Voice Rooms</span>
                     <div className={styles.searchBox}>
                         <img src="/images/search-icon.png" alt="search"></img>
                         <input type="text" className={styles.searchInput}/>
