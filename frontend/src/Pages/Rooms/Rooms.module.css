@@ -10,6 +10,11 @@
     align-items: center;   
 }
 
+/* .right{
+    display: flex;
+    align-items: flex-end;
+} */
+
 .heading{
     font-size: 20px;
     font-weight: bold;
@@ -41,11 +46,15 @@
 .heading::after{
     content: '';
     position: absolute;
-    bottom: -24px;
+    bottom: -40px;
     left: 0px;
     width: 1000%;
     height: 3px;
     background: #07f;
+}
+
+.roomButton{
+    display: inline-flex;
 }
 
 .startRoomButton{
@@ -59,13 +68,35 @@
     transition: all .3s ease-in-out;
 }
 
+.joinRoomButton{
+    height: 34px;
+    width: 197px;
+    display: flex;
+    align-items: center;
+    background:#20bd5f;
+    border-radius: 20px;
+    padding: 5px 20px; 
+    color: #fff;
+    transition: all .3s ease-in-out;
+    margin-top: 20px;
+}
+
+
 .startRoomButton span {
+    font-size: 16px;
+    margin-left: 10px;
+}
+.joinRoomButton span{
     font-size: 16px;
     margin-left: 10px;
 }
 
 .startRoomButton:hover{
     background: #136735;
+}
+
+.joinRoomButton:hover{
+    background: #136735;    
 }
 
 .roomList{

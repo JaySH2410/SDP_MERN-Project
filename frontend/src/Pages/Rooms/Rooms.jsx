@@ -85,13 +85,15 @@ const Rooms = () => {
                         <input type="text" className={styles.searchInput}/>
                     </div>
                 </div>
-                <div className={styles.right}>
-                    <button onClick={openModal} className={styles.startRoomButton}>
-                        <img src="/images/add-room-icon.png" alt="add-room"></img>
-                        <span> Start New Room</span>
-                    </button>
-
-                </div>
+                {/* <div className={styles.roomButtons}> */}
+                    <div className={styles.right}>
+                        <button onClick={openModal} className={styles.startRoomButton}>
+                            <img src="/images/add-room-icon.png" alt="add-room"></img>
+                            <span> Start New Room</span>
+                        </button>
+                    </div>
+                    
+                {/* </div> */}
             </div>
             <div className={styles.roomList}>
                 {rooms.map((room) => (            
@@ -104,3 +106,10 @@ const Rooms = () => {
 };
 
 export default Rooms;
+
+{/* <div className={styles.right}>
+                        <button  className={styles.joinRoomButton}>
+                            <img src="/images/chat-bubble.png" alt="join-room"></img>
+                            <span> Join Private Room</span>
+                        </button>
+                    </div> */}

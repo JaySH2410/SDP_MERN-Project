@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useStateWithCallback } from "./useStateWithCallback";
 import {socketInit} from "../socket";
 import { ACTIONS } from "../actions";
-import { connections } from "mongoose";
+// import { connections } from "mongoose";
 import freeice from 'freeice';
 
 // const users = [

@@ -65,10 +65,8 @@ const Room = () => {
                     </button>
                     <audio 
                         ref={(instance) => provideRef(instance, client.id)} //read abt this 
-                    // controls
-                        autoPlay></audio>
-                    
-                    
+                        controls
+                        autoPlay></audio>                    
                     </div>
                     <h4>{client.name}</h4>
                 </div>
