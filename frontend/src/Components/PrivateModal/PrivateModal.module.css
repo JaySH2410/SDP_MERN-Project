@@ -21,6 +21,15 @@
     border-radius: 20px;
 }
 
+.closeButton{
+    background: none;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    /* border-radius: 20px; */
+}
+
+
 .modalHeader{
     padding: 30px;
     border-bottom: 2px solid #262626;
