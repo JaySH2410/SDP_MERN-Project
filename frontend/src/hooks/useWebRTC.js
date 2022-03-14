@@ -23,6 +23,8 @@ export const useWebRTC = (roomId, user) => {
     const localMediaStream = useRef(null);
 
     const socket = useRef(null);
+    const clientsRef = useRef([]);
+
     useEffect(() => {
         socket.current = socketInit();
     },[])
@@ -81,9 +83,7 @@ export const useWebRTC = (roomId, user) => {
 
         // Leaving the room
         return () => {
-            localMediaStream.current
-                .getTracks()
-                .forEach((track) => track.stop());
+            localMediaStream.current.getTracks().forEach((track) => track.stop());
             socket.current.emit(ACTIONS.LEAVE, { roomId });
         };
     }, []); 
@@ -253,13 +253,65 @@ export const useWebRTC = (roomId, user) => {
     }, []);
 
 
+    useEffect(() => {
+        clientsRef.current = clients;   
+    }, [clients]);
 
+    //Listen for mute & unmute
+    useEffect(() => {
+        socket.current.on(ACTIONS.MUTE, ({peerId, userId}) => {
+                setMute(true, userId);
+        });
+
+        socket.current.on(ACTIONS.UN_MUTE, ({peerId, userId}) => {
+            setMute(false, userId);
+        });
+
+        const setMute = (mute, userId) =>{
+            const clientIdx = clientsRef.current.map(client => client.id).indexOf(userId);
+            console.log('idx',clientIdx);
+            
+            const connectedClients = JSON.parse(JSON.stringify(clientsRef.current));
+            if(clientIdx > -1){
+                connectedClients[clientIdx].muted = mute;
+                setClients(connectedClients);
+            }
+        }
+    }, []);
 
     const provideRef = (instance, userId) => {
         audioElements.current[userId] = instance;
     };
 
-    return { clients, provideRef };
+    //handle mute 
+    const handleMute = (isMute, userId) => {
+        //console.log('mute',isMute);
+        let settled = false;
+        let interval = setInterval(() => {
+            if(localMediaStream.current){
+                localMediaStream.current.getTracks()[0].enabled = !isMute;
+                if(isMute){
+                    socket.current.emit(ACTIONS.MUTE, {
+                        roomId,
+                        userId,
+                    });
+                } else{
+                    socket.current.emit(ACTIONS.UN_MUTE, {
+                        roomId,
+                        userId,
+                    }); 
+                }
+
+                settled = true;
+            }
+            if(settled){
+                clearInterval(interval);
+            }
+        }, 200); 
+        
+    }
+
+    return { clients, provideRef, handleMute };
 }
 
 

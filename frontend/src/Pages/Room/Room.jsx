@@ -9,11 +9,18 @@ import { getRoom } from '../../http';
 const Room = () => {
     const {id: roomId} = useParams();  
     const user = useSelector((state) => state.auth.user);
-    const {clients, provideRef  } = useWebRTC(roomId, user);
+    const {clients, provideRef, handleMute } = useWebRTC(roomId, user);
     const history = useHistory();
     const [room, setRoom] = useState(null);
+    const [isMute, setMute] = useState(true);
+
+    useEffect(() => {
+        handleMute(isMute, user.id);
+    }, [isMute]);
+
+
     const manualLeave =() => {
-        history.push('/rooms');
+        history.push('/rooms'); //room/622fa249a5adaf213d792db6
     }
 
     useEffect(() => {
@@ -24,6 +31,12 @@ const Room = () => {
         };
         fetchRoom();
     }, [roomId]);
+
+    const handleMuteClick = (clientId) => {
+        //console.log('click', clientId);
+        if(clientId !== user.id)return;
+        setMute((isMute) => !isMute);
+    }
 
     return (
     <div>
@@ -59,9 +72,24 @@ const Room = () => {
                 <div className={styles.client} key={client.id}>
                     <div className={styles.userHead}>
                     <img className={styles.userAvatar} src={client.avatar} alt='dp'/>
-                    <button className={styles.micBtn}>
-                        {/* <img src='/images/mic.png' alt='mic'></img> */}
-                        <img src='/images/mic-mute.png' alt='mic mute'></img>
+                    <button onClick={() => handleMuteClick(client.id)} className={styles.micBtn}>
+                        {
+                            client.muted ? 
+                                (
+                                    
+                                    <img 
+                                    src='/images/mic-mute.png' 
+                                    alt='mic mute'
+                                    />
+                                ) : (
+                                    <img 
+                                    src='/images/mic.png' 
+                                    alt='mic'
+                                    />
+                                )
+                        }
+                        
+                        
                     </button>
                     <audio 
                         ref={(instance) => provideRef(instance, client.id)} //read abt this 

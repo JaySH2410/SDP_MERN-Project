@@ -3,6 +3,7 @@ import styles from "./Rooms.module.css";
 import RoomCard from '../../Components/RoomCard/RoomCard';
 import AddRoomModal from '../../Components/AddRoomModal/AddRoomModal';
 import { getAllRooms } from "../../http";
+import PrivateModal from "../../Components/PrivateModal/PrivateModal";
 
 // const rooms = [
 //     {
@@ -63,6 +64,8 @@ const Rooms = () => {
     const [showModal, setShowModal] = useState(false);
     const [rooms, setRooms] = useState([]);
 
+    const [privateModal, setPrivateModal] = useState(false);
+
     useEffect(() => {
         const fetchRooms = async () => {
             const {data} = await getAllRooms();
@@ -73,6 +76,10 @@ const Rooms = () => {
 
     function openModal() {
         setShowModal(true);
+    }
+
+    function openPrivateModal() {
+        setPrivateModal(true);
     }
 
     return <>
@@ -92,6 +99,11 @@ const Rooms = () => {
                             <span> Start New Room</span>
                         </button>
                     </div>
+                    <div className={styles.right}>
+                        <button onClick={openPrivateModal} className={styles.startRoomButton}>
+                            <span> Join Private Room</span>
+                        </button>
+                    </div>
                     
                 {/* </div> */}
             </div>
@@ -102,6 +114,7 @@ const Rooms = () => {
             </div>
         </div>
         {showModal && <AddRoomModal onClose={() => setShowModal(false)}/>}
+        {privateModal && <PrivateModal/>}
     </>
 };
 
