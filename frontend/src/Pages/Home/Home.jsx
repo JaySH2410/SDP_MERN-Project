@@ -23,11 +23,13 @@ const Home = () => {
     return(
         <div className={styles.cardWrapper}>
            
-            <Card title="Welcome To ">
+            <Card title="Welcome To PodHut">
                 <p className={styles.text}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sem nibh, pulvinar in sapien quis, pharetra interdum odio. 
-                    Proin eget ligula eu lectus laoreet pulvinar tincidunt in sem. Donec ut dictum nisl. Donec condimentum auctor nisi eget sagittis.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo vitae libero quis dapibus.
+                    PodHut is a podacast application, where people can interact with each other and can talk about; be it sports, politics or academics.
+                    <br></br>
+                    Not able find topic you want to discuss, feel free to create your own Room and start conversation.
+                    <br></br>
+                    Like to host a private session where only invited people can join, than start a "Close Room"
                 </p>
                 <div>
                     <Button onClick={StartRegister} text="Go"/>
